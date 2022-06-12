@@ -13,3 +13,6 @@ Gemspec/RequiredRubyVersion:
 
 Metrics/MethodLength:
   Enabled: false
+
+Metrics/LineLength:
+  Max: 120
