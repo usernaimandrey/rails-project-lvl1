@@ -10,7 +10,7 @@ module HexletCode
           %( #{k}="#{v}")
         end
         close = single?(tag_name) ? nil : %(</#{tag_name}>)
-        %(<#{tag_name}#{formated_attributes.join()}>#{content}#{close})
+        %(<#{tag_name}#{formated_attributes.join}>#{content}#{close})
       end
 
       def single?(tag_name)
