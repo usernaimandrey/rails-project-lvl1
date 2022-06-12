@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Andrey Shlyapnikov"]
   spec.email         = ["anshlyapnikov@gmail.com"]
 
-  spec.summary       = "Генератор форм – DSL, с помощью которого удобно генерировать формы."
-  spec.description   = "Генератор форм – DSL, с помощью которого удобно генерировать формы."
+  spec.summary       = "Form Generator - DSL, with which it is convenient to generate forms."
+  spec.description   = "Form Generator - DSL, with which it is convenient to generate forms."
   spec.homepage      = "https://github.com/usernaimandrey/rails-project-lvl1"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"
