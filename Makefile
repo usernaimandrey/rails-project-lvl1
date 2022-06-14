@@ -17,6 +17,6 @@ test:
 	bundle exec rake test
 
 push:
-	./git.sh $(commit)
+	./git.sh $(commit) $(opt)
 
 .PHONY: test

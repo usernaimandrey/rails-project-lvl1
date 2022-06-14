@@ -4,8 +4,8 @@ require 'test_helper'
 
 class HexletCodeTest < Minitest::Test
   def setup
-    contant_user = Struct.new(:name, :job, keyword_init: true)
-    @user = contant_user.new
+    constant_user = Struct.new(:name, :job, keyword_init: true)
+    @user = constant_user.new
   end
 
   def test_form_for
