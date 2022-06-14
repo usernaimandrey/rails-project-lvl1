@@ -7,7 +7,4 @@ require 'minitest/autorun'
 
 require 'coveralls'
 
-if ENV['CI']
-  require 'coveralls'
-  Coveralls.wear!
-end
+Coveralls.wear!
