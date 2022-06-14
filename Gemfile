@@ -17,4 +17,6 @@ end
 
 group :test do
   gem 'minitest', '~> 5.0'
+
+  gem 'coveralls', require: false
 end
