@@ -42,4 +42,14 @@ class HexletCodeTest < Minitest::Test
     end
     assert_equal(@form2, html)
   end
+
+  def test_with_raise
+    assert_raises(NoMethodError) do 
+      HexletCode.form_for @user, url: '/users' do |f|
+        f.input :name
+        f.input :job, as: :text
+        f.input :age
+      end
+    end
+  end
 end
