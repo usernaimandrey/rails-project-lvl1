@@ -5,19 +5,19 @@ require_relative 'hexlet_code/version'
 module HexletCode
   class Error < StandardError; end
   autoload :Tag, 'hexlet_code/tag'
-  autoload :Validator, 'hexlet_code/validator'
-  autoload :AstBuilder, 'hexlet_code/ast_builder'
-  autoload :Render, 'hexlet_code/render'
+  autoload :ModelTag, 'hexlet_code/model_tag'
+  autoload :ModelForm, 'hexlet_code/model_form'
+  autoload :View, 'hexlet_code/view'
 
   class << self
     def form_for(attr_field, attr_form = {})
-      ast_builder = AstBuilder.new(attr_form)
-      validator = Validator.new(attr_field)
+      model_form = ModelForm.new(attr_form)
+      model_tag = ModelTag.new(attr_field)
 
-      yield validator
+      yield model_tag
 
-      ast_builder.build(validator.form_data)
-      Render.render(ast_builder.form)
+      model_form.build(model_tag.form_data)
+      View.render(model_form.form)
     end
   end
 end

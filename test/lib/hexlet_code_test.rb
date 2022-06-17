@@ -12,39 +12,34 @@ class HexletCodeTest < Minitest::Test
     @form3 = load_fixtures('form3.html')
   end
 
-  def test_empty_form
-    expected = %(<form action="#" method="post">\n</form>)
-    html = HexletCode.form_for @user do |f|
-      f
-    end
-    assert_equal(expected, html)
-  end
-
-  def test_empty_form_with_url
-    expected = %(<form action="/users" method="post">\n</form>)
-    html = HexletCode.form_for @user, url: '/users' do |f|
-      f
-    end
-    assert_equal(expected, html)
-  end
-
-  def test_create_with_field
+  def test_default_attr
     html = HexletCode.form_for @user1 do |f|
       f.input :name
       f.input :job, as: :text
+      f.submit
     end
     assert_equal(@form1, html)
   end
 
-  def test_with_url
+  def test_custom_attr
     html = HexletCode.form_for @user1, url: '/users' do |f|
-      f.input :name
-      f.input :job, as: :text
+      f.input :name, class: 'user-input'
+      f.input :job, as: :text, rows: 50, cols: 50
+      f.submit
     end
     assert_equal(@form2, html)
   end
 
-  def test_with_raise
+  def test_create_custom_submit
+    html = HexletCode.form_for @user2 do |f|
+      f.input :name
+      f.input :job
+      f.submit 'Go', name: 'registratio'
+    end
+    assert_equal(@form3, html)
+  end
+
+  def test_not_exists_user_method
     assert_raises(NoMethodError) do
       HexletCode.form_for @user1, url: '/users' do |f|
         f.input :name
@@ -52,14 +47,5 @@ class HexletCodeTest < Minitest::Test
         f.input :age
       end
     end
-  end
-
-  def test_create_submit
-    html = HexletCode.form_for @user2 do |f|
-      f.input :name
-      f.input :job
-      f.submit
-    end
-    assert_equal(@form3, html)
   end
 end

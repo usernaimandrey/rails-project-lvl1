@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HexletCode
-  class Render
+  class View
     class << self
       def render(ast, replacer = ' ', count = 2)
         tag_name, attributes, children = ast.values_at(:tag_name, :attributes, :children)

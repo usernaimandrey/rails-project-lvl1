@@ -13,7 +13,7 @@ module HexletCode
       end
 
       def single?(tag_name)
-        single_tags = %w[br hr img input link]
+        single_tags = %i[br hr img input link]
         single_tags.include?(tag_name)
       end
     end
