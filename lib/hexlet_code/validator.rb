@@ -15,5 +15,9 @@ module HexletCode
       value = @attr_field.public_send(attr_name)
       form_data[attr_name] = { value: value, options: options }
     end
+
+    def submit(name = 'Save', options = { as: :submit })
+      form_data[:submit] = { value: name, options: options }
+    end
   end
 end

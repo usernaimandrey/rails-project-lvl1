@@ -4,7 +4,6 @@ require_relative 'hexlet_code/version'
 
 module HexletCode
   class Error < StandardError; end
-
   autoload :Tag, 'hexlet_code/tag'
   autoload :Validator, 'hexlet_code/validator'
   autoload :AstBuilder, 'hexlet_code/ast_builder'
@@ -18,7 +17,7 @@ module HexletCode
       yield validator
 
       ast_builder.build(validator.form_data)
-      Render.render(ast_builder.root)
+      Render.render(ast_builder.form)
     end
   end
 end

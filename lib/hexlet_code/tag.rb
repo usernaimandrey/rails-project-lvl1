@@ -6,7 +6,7 @@ module HexletCode
       def build(tag_name, attributes = {})
         content = yield if block_given?
         formated_attributes = attributes.to_a.map do |tag|
-          %( #{tag.first}="#{tag.last}")
+          %( #{tag.first}="#{tag.last}") if tag.last
         end
         close_tag = single?(tag_name) ? nil : "</#{tag_name}>"
         "<#{tag_name}#{formated_attributes.join}>#{content}#{close_tag}"

@@ -2,10 +2,10 @@
 
 module HexletCode
   class AstBuilder
-    attr_accessor :root
+    attr_accessor :form
 
     def initialize(attr_form)
-      @root = {
+      @form = {
         tag_name: 'form',
         attributes: { action: attr_form[:url] || '#', method: 'post' },
         body: nil,
@@ -14,20 +14,23 @@ module HexletCode
     end
 
     def build(form_data)
-      form_data.each do |k, v|
+      form_data.each do |name, v|
         tag_name = v[:options].fetch(:as, :input)
         case tag_name
-        when :input then root[:children] << input(k, v[:value])
-        when :text then root[:children] << textarea(k, v[:value])
+        when :input
+          form[:children] << label(name)
+          form[:children] << input(name: name, value: v[:value])
+        when :text then form[:children] << textarea(name, v[:value])
+        when :submit then form[:children] << input(name: 'commit', type: 'submit', value: v[:value])
         else puts "Unknow tag name: #{tag_name}"
         end
       end
     end
 
-    def input(name, value)
+    def input(attributes)
       {
         tag_name: 'input',
-        attributes: { name: name, type: 'text', value: value },
+        attributes: { name: nil, type: 'text', value: nil }.merge(attributes),
         body: nil,
         children: []
       }
@@ -38,6 +41,15 @@ module HexletCode
         tag_name: 'textarea',
         attributes: { cols: 20, rows: 40, name: name },
         body: body,
+        children: []
+      }
+    end
+
+    def label(input_name)
+      {
+        tag_name: 'label',
+        attributes: { for: input_name },
+        body: input_name.capitalize,
         children: []
       }
     end
