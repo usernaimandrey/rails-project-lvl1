@@ -20,7 +20,7 @@ module HexletCode
                        attributes: { name: attr_name, value: value }.merge(options) }
       when :text
         form_data << { tag_name: :textarea, input_type: input_type, body: value,
-                       attributes: { name: attr_name }.merge(options.reject { |k, _v| k == :as }) }
+                       attributes: { name: attr_name }.merge(options.except(:as)) }
       else "Unknow input type: #{input_type}"
       end
     end
