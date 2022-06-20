@@ -1,4 +1,5 @@
-### Hexlet tests and linter status:
+### Hexlet tests and linter status
+
 [![Actions Status](https://github.com/usernaimandrey/rails-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/usernaimandrey/rails-project-lvl1/actions)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
 
@@ -18,14 +19,19 @@ gem 'hexlet_code'
 
 And then execute:
 
-    $ bundle install
+```Bash
+bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install hexlet_code
+```Bash
+gem install hexlet_code
+```
 
 ## Usage
-```
+
+```Ruby
 requare hexlet_code
 
 User = Struct.new(:name, :job, :gender, keyword_init: true) # create an object with fields
@@ -37,17 +43,17 @@ HexletCode.form_for user do |f|
   # Checks if there is a value inside job
   f.input :job, as: :text
 end
-->
+#->
 # <form action="#" method="post">
 #   <input name="name" type="text" value="rob">
 #   <textarea cols="20" rows="40" name="job">hexlet</textarea>
 # </form>
 
 ```
+
 If the specified field does not exist in the object. then an error occurs
 
-```
-
+```Ruby
 html = HexletCode.form_for user, url: '/users' do |f|
   f.input :name
   f.input :job, as: :text
@@ -55,8 +61,27 @@ html = HexletCode.form_for user, url: '/users' do |f|
   f.input :age
 end
 # =>  `public_send': undefined method `age' for #<struct User id=nil, name=nil, job=nil> (NoMethodError)
-
 ```
+
+with custom attributes
+
+```Ruby
+html = HexletCode.form_for @user1, url: '/users' do |f|
+      f.input :name, class: 'user-input'
+      f.input :job, as: :text, rows: 50, cols: 50
+      f.submit
+    end
+
+# ->
+# <form action="/users" method="post">
+#   <label for="name">Name</label>
+#   <input name="name" type="text" value="rob" class="user-input">
+#   <label for="job">Job</label>
+#   <textarea cols="50" rows="50" name="job">hexlet</textarea>
+#   <input name="commit" type="submit" value="Save">
+# </form>
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -65,7 +90,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/usernaimandrey/hexlet_code. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/hexlet_code/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at <https://github.com/usernaimandrey/hexlet_code>. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/hexlet_code/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
