@@ -7,9 +7,10 @@ module HexletCode
   autoload :ModelForm, 'hexlet_code/model_form'
   autoload :View, 'hexlet_code/view'
   autoload :DataCollector, 'hexlet_code/data_collector'
-  autoload :Input, 'hexlet_code/inputs/input'
-  autoload :Text, 'hexlet_code/inputs/text'
-  autoload :Submit, 'hexlet_code/inputs/submit'
+  autoload :Input, 'hexlet_code/tags/input'
+  autoload :Text, 'hexlet_code/tags/text'
+  autoload :Submit, 'hexlet_code/tags/submit'
+  autoload :Label, 'hexlet_code/tags/label'
 
   class << self
     def form_for(attributes, form_attrs = {})
