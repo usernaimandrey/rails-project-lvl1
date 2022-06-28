@@ -5,7 +5,10 @@ module HexletCode
     class << self
       def build_tag(data_tag)
         default_attr = { name: nil, type: 'text', value: nil }
-        { tag_name: :input, attributes: default_attr.merge(data_tag) }
+        [
+          HexletCode::Label.build_tag(data_tag[:name]),
+          { tag_name: :input, attributes: default_attr.merge(data_tag) }
+        ]
       end
     end
   end

@@ -19,8 +19,9 @@ module HexletCode
       form_data.each do |t|
         type_tag = t.fetch(:as, :input).to_s.capitalize
         object = Object.const_get "HexletCode::#{type_tag}"
-        form[:children] << HexletCode::Label.build_tag(t[:name]) if type_tag != 'Submit'
-        form[:children] << object.build_tag(t)
+        label, input = object.build_tag(t)
+        form[:children] << label unless label.empty?
+        form[:children] << input
       end
     end
   end
