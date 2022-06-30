@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HexletCode
-  class ModelForm
+  class View
     attr_reader :form
 
     def initialize(form_attrs)
