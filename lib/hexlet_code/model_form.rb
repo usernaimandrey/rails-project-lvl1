@@ -3,7 +3,6 @@
 module HexletCode
   class ModelForm
     attr_reader :form
-    attr_accessor :inputs
 
     def initialize(form_attrs)
       @form = {
