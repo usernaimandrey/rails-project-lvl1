@@ -2,27 +2,34 @@
 
 module HexletCode
   class ModelForm
-    attr_accessor :form
-
-    attr_reader :default, :form_data
+    attr_reader :form
+    attr_accessor :inputs
 
     def initialize(form_attrs)
       @form = {
         tag_name: :form,
         attributes: { action: form_attrs[:url] || '#', method: 'post' }.merge(form_attrs.except(:url)),
-        body: nil,
-        children: []
+        body: nil
       }
     end
 
-    def build_model(form_data)
-      form_data.each do |t|
+    def render(form_data)
+      content = form_data.reduce('') do |acc, t|
         type_tag = t.fetch(:as, :input).to_s.capitalize
-        object = Object.const_get "HexletCode::#{type_tag}"
-        label, input = object.build_tag(t)
-        form[:children] << label unless label.empty?
-        form[:children] << input
+        class_name = Object.const_get "HexletCode::#{type_tag}"
+        label, input = class_name.build_tag(t)
+
+        "#{acc}#{render_tag(label)}#{render_tag(input)}"
       end
+      (HexletCode::Tag.build(form[:tag_name], form[:attributes]) { "#{content}\n" }).to_s
+    end
+
+    def render_tag(tag, replacer = ' ', count = 2)
+      return nil if tag.empty?
+
+      "\n#{replacer * count}#{HexletCode::Tag.build(tag[:tag_name], tag[:attributes]) do
+                                tag[:body]
+                              end }"
     end
   end
 end
